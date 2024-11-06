@@ -1,4 +1,5 @@
 #root {
+  color: black;
   max-width: 1280px;
   margin: 0 auto;
   padding: 2rem;
@@ -40,3 +41,115 @@
 .read-the-docs {
   color: #888;
 }
+
+button {
+  color: black;
+  border-radius: 8px;
+  border-color: green;
+  border: 1px solid transparent;
+  padding: 0.6em 1.2em;
+  font-size: 1em;
+  font-weight: 500;
+  font-family: inherit;
+  background-color: white;
+  cursor: pointer;
+  transition: border-color 0.25s;
+}
+button:hover {
+  border-color: #646cff;
+}
+button:focus,
+button:focus-visible {
+  outline: 4px auto -webkit-focus-ring-color;
+}
+
+h1 {
+  font-size: 3.2em;
+  line-height: 1.1;
+}
+
+#get-started-button {
+  border: 2px solid black; /* Black border */
+  background-color: transparent; /* Transparent background */
+  padding: 0.6em 1.2em; /* Optional: adjust padding */
+  transition: background-color 0.3s; /* Smooth transition for the hover effect */
+}
+
+#get-started-button:hover {
+  background-color: lightgreen; /* Light green background on hover */
+}
+
+#newspaper {
+  width: 122px; /* Twice the size of the original image */
+  height: auto;  /* Maintain aspect ratio */
+  animation: spin 10s linear infinite; /* Apply continuous spin animation */
+  top: 10px; /* Adjust the position as needed */
+  left: 10px; /* Adjust the position as needed */
+  
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg); /* Start rotation */
+  }
+  to {
+    transform: rotate(360deg); /* End rotation */
+  }
+}
+
+
+/* Nav.css */
+
+.navbar {
+  display: flex;               /* Use flexbox to arrange items */
+  justify-content: space-around; /* Equal space between links */
+  align-items: center;         /* Center items vertically */
+  background-color: #f0f0f0;   /* Light gray background for the navbar */
+  padding: 1rem;               /* Space inside the box */
+  border: 1px solid #ddd;      /* Optional border for the navbar */
+  border-radius: 8px;          /* Rounded corners */
+  max-width: 600px;            /* Optional max width for navbar */
+  margin: 0 auto;              /* Center the navbar horizontally */
+}
+
+.nav-link {
+  text-decoration: none;       /* Remove underline from links */
+  color: red;                /* Set link color */
+  font-size: 1.2rem;           /* Increase font size */
+  padding: 0.5rem 1rem;        /* Add padding around each link */
+  transition: color 0.3s;      /* Smooth transition for hover effect */
+}
+
+.nav-link:hover {
+  color: green;              /* Color change on hover */
+}
+
+/* Center the ordered list container with padding for shifting */
+ol {
+  padding: 0; /* Remove default padding */
+  margin: 0 auto; /* Center the ordered list */
+  width: fit-content; /* Allow the list to fit the content */
+  text-align: left; /* Align text to the left */
+  padding-left: 2rem; /* Add padding to shift the entire list right (approximately 17 pixels) */
+}
+
+/* Style for list items */
+li {
+  margin: 0.5em 0; /* Add some vertical space between items */
+}
+
+.article-body {
+  background-color: #f0f0f0; /* Light gray background */
+  border-radius: 8px;        /* Rounded corners */
+  padding: 1rem;             /* Padding inside the box */
+  max-width: 60ch;           /* Approx. 100 characters wide */
+  margin: 1rem auto;         /* Center the box horizontally */
+  text-align: left;          /* Left-align the text */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Optional: subtle shadow */
+  line-height: 1.6;          /* Improve readability */
+  word-wrap: break-word;     /* Wrap long words if needed */
+}
+
+
+
+
