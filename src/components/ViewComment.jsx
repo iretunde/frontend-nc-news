@@ -15,6 +15,7 @@ const ViewComment = () => {
         fetch(`https://nc-news-0g8q.onrender.com/api/articles/${article_id}/comments`)
         .then((response) => response.json())
         .then((data) => {
+            console.log('HI I was here', data.comments)
             showComments(data.comments)
             setIsLoading(false)           
         })
