@@ -3,46 +3,53 @@ import { useParams } from "react-router-dom";
 import Logo from "./Logo";
 import ViewComment from "./ViewComment";
 import Loading from "./Loading";
-import ErrorComponent from "./ErrorComponent"
+import ErrorComponent from "./ErrorComponent";
+import PostComment from "./PostComment"; // Import PostComment component
 
 const SpecificArticle = () => {
     const { article_id } = useParams();
     const [article, setArticle] = useState([]);
-    const [isLoading, setIsLoading] = useState(true)
+    const [isLoading, setIsLoading] = useState(true);
     const [error, setError] = useState(null);
-    const [showComments, setShowComments] = useState(false); // State to control the comment view
+    const [showComments, setShowComments] = useState(false);
+    const [showPostComment, setShowPostComment] = useState(false);
 
     useEffect(() => {
         fetch(`https://nc-news-0g8q.onrender.com/api/articles/${article_id}`)
             .then((response) => response.json())
             .then((data) => {
-                if (data.msg !== undefined){
-                    return Promise.reject(data)
+                if (data.msg !== undefined) {
+                    return Promise.reject(data);
                 }
                 setArticle(data.article[0]);
-                setIsLoading(false)
+                setIsLoading(false);
             })
             .catch((err) => {
                 setError(err);
-              });
-            }, [article_id])
+            });
+    }, [article_id]);
 
+    if (error) {
+        return <ErrorComponent message={error.msg} />;
+    }
 
-  if (error) {
-    return <ErrorComponent message={error.msg} />;
-  }
-    // Toggle comment view on button click
+    // Toggle comments view
     const handleToggleComments = () => {
         setShowComments((prevShowComments) => !prevShowComments);
     };
 
-    if (isLoading){
+    // Function to close the PostComment form
+    const closePostComment = () => {
+        setShowPostComment(false);
+    };
+
+    if (isLoading) {
         return (
             <>
-            <Logo />
-            <Loading />
+                <Logo />
+                <Loading />
             </>
-        )
+        );
     }
 
     return (
@@ -54,12 +61,20 @@ const SpecificArticle = () => {
             </h2>
             <div className="article-body">{article.body}</div>
 
-            {/* Button to toggle comments */}
+            {/* Toggle comments */}
             <button className="toggle-comments-button" onClick={handleToggleComments}>
                 {showComments ? "Hide Comments" : "View Comments"}
             </button>
 
-            {/* Conditionally render the ViewComment component */}
+            {/* Post comment button */}
+            <button style={{ border: "1px solid black", marginLeft: "10px" }} onClick={() => setShowPostComment(true)}>
+                Post Comment
+            </button>
+
+            {/* Render PostComment if showPostComment is true */}
+            {showPostComment && <PostComment closeForm={closePostComment} />}
+
+            {/* Conditionally render ViewComment component */}
             {showComments && <ViewComment articleId={article_id} />}
         </>
     );

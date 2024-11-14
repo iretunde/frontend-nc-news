@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 
+//Need to adjust code so that it still knows that the state that the user voted even when they come back to it
+
 const CommentCard = ({ comments }) => {
     const [showPopup, setShowPopup] = useState(false);
     const [popupMessage, setPopupMessage] = useState("");
