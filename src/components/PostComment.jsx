@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useParams } from "react-router-dom";
 
-const PostComment = ({ closeForm }) => {
+const PostComment = ({ closeForm, setFetchComments }) => {
     const [comment, setComment] = useState("");
     const { article_id } = useParams(); // Get the article_id from the route
 
@@ -32,6 +32,7 @@ const PostComment = ({ closeForm }) => {
             .then((data) => {
                 console.log("Comment posted:", data.comment);
                 setComment(""); // Clear the input field after successful submission
+                setFetchComments((prev) => prev + 1)
                 closeForm(); // Close the form
             })
             .catch((error) => {

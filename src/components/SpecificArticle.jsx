@@ -13,6 +13,7 @@ const SpecificArticle = () => {
     const [error, setError] = useState(null);
     const [showComments, setShowComments] = useState(false);
     const [showPostComment, setShowPostComment] = useState(false);
+    const [fetchComments, setFetchComments] = useState(0)
 
     useEffect(() => {
         fetch(`https://nc-news-0g8q.onrender.com/api/articles/${article_id}`)
@@ -72,10 +73,10 @@ const SpecificArticle = () => {
             </button>
 
             {/* Render PostComment if showPostComment is true */}
-            {showPostComment && <PostComment closeForm={closePostComment} />}
+            {showPostComment && <PostComment closeForm={closePostComment} setFetchComments={setFetchComments} />}
 
             {/* Conditionally render ViewComment component */}
-            {showComments && <ViewComment articleId={article_id} />}
+            {showComments && <ViewComment articleId={article_id} fetchComments={fetchComments} setFetchComments={setFetchComments} />}
         </>
     );
 };
