@@ -2,15 +2,19 @@
 
 This project is a frontend application for **Northcoders News**, a social news aggregation, web content rating, and discussion site. Users can browse articles, explore topics, view individual articles with detailed content, and leave comments. This application is built with **React** and interacts with the API I built in the bc-nc-news project (a RESTful API built with Node.js and PostgreSQL) to retrieve and manipulate data.
 
+## Live Demo
+
+You can immediately see the frontend in action via this link: (https://fe-nc-news-nine.vercel.app/)
+
 ## Features
 
 - **View Articles:** Browse articles by topic and view individual article details.
 - **User Interaction:** Upvote, downvote, and comment on articles.
 - **Navigation:** Navigate between the homepage, topics, and articles, and view specific articles in detail.
 
-## Getting Started
+## Getting Started Locally
 
-To get the project up and running, follow the steps below.
+If you want to host the application locally, follow the instructions below.
 
 ### Prerequisites
 

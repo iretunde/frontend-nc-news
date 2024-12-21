@@ -36,8 +36,8 @@ const Topics = () => {
         <ol>
             {topics.map((topic, indx) => (                
                     <li>
-                        <Link to={`/articles?topic=${topic}`} key={indx}>{topic}
-
+                        <Link to={`/articles?topic=${topic}`} key={indx}>
+                        {topic[0].toUpperCase()+topic.slice(1)}
                         </Link>
                     </li>
 
