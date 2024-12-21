@@ -1,18 +1,25 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import DeleteComment from "./DeleteComment";
 
 //Need to adjust code so that it still knows that the state that the user voted even when they come back to it
+//Need to check if I have the correct end point in line 36. I don't think I have built an endpoint edit the votes of a comment.
 
-const CommentCard = ({ comments }) => {
+const CommentCard = ({ comments, setFetchComments }) => {
     const [showPopup, setShowPopup] = useState(false);
     const [popupMessage, setPopupMessage] = useState("");
     
     // Store initial votes from each comment to track local state without changing the original comments array
-    const [localVotes, setLocalVotes] = useState(
-        comments.reduce((acc, comment) => {
+    const [localVotes, setLocalVotes] = useState({});
+
+    useEffect(() => {
+        const votesMap = comments.reduce((acc, comment) => {
+            console.log(comments)
             acc[comment.comment_id] = comment.votes;
             return acc;
-        }, {})
-    );
+        }, {});
+        console.log("Syncing localVotes with comments...");
+        setLocalVotes(votesMap);
+    }, [comments]);
 
     // Track the voting state (1 for upvote, -1 for downvote, 0 for neutral) for each comment
     const [voteState, setVoteState] = useState({});
@@ -26,6 +33,10 @@ const CommentCard = ({ comments }) => {
 
     // Function to handle the PATCH request to the server
     const updateVoteOnServer = (commentId, incVotes) => {
+        console.log(`This is incVotes: ${incVotes}`)
+        console.log(commentId)
+        console.log('Is this happening')
+        //It should actually be $articles_id not comments, but then that makes no sense. I think it's a backend issue
         fetch(`https://nc-news-0g8q.onrender.com/api/articles/${commentId}`, {
             method: "PATCH",
             headers: {
@@ -39,7 +50,7 @@ const CommentCard = ({ comments }) => {
             // Revert the vote locally if the request fails
             setLocalVotes((prevVotes) => ({
                 ...prevVotes,
-                [commentId]: prevVotes[commentId] - incVotes,
+                [commentId]: prevVotes[commentId] + incVotes,
             }));
         });
     };
@@ -115,14 +126,15 @@ const CommentCard = ({ comments }) => {
                 {comments.map((comment) => (
                     <li key={comment.comment_id} className="comment-item">
                         <div>{comment.body}</div>
-
+    
                         <div>
                             Author: <span style={{ color: "blue" }}>{comment.author}</span>
                         </div>
-
+    
                         <div>
+                            {console.log(`Comment id = ${comment.comment_id}, Votes = ${localVotes[comment.comment_id]}`)}
                             Votes: <span style={{ color: "blue" }}>{localVotes[comment.comment_id]}</span>
-
+    
                             <button
                                 style={{
                                     marginLeft: "10px",
@@ -133,7 +145,7 @@ const CommentCard = ({ comments }) => {
                             >
                                 Vote Up
                             </button>
-
+    
                             <button
                                 style={{
                                     marginLeft: "10px",
@@ -145,11 +157,15 @@ const CommentCard = ({ comments }) => {
                             >
                                 Vote Down
                             </button>
+                            
+                            {comment.author === 'cooljmessy' && (
+                                <DeleteComment comment_id={comment.comment_id} setFetchComments={setFetchComments} />
+                            )}
                         </div>
                     </li>
                 ))}
             </ol>
-
+    
             {showPopup && <Popup />}
             
             {showPopup && (
@@ -165,6 +181,7 @@ const CommentCard = ({ comments }) => {
             )}
         </>
     );
+    
 };
 
 export default CommentCard;

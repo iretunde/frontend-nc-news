@@ -222,3 +222,19 @@ li {
   background-color: #e0f7ff;     /* Light blue background on hover */
   border-color: #80d4ff;         /* Light blue border on hover */
 }
+
+
+/* Dropdown Styling */
+.dropdown select {
+  padding: 4px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  margin-bottom: 10px;  /* Adds spacing below the dropdown */
+  cursor: pointer;
+  transition: border-color 0.3s;
+}
+
+.dropdown select:hover {
+  border-color: #646cff; /* Change border color on hover */
+}

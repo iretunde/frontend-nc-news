@@ -5,10 +5,12 @@ import CommentCard from "./CommentCard";
 import Loading from "./Loading";
 
 
-const ViewComment = () => {
+const ViewComment = ({fetchComments, setFetchComments}) => {
     const [comments, showComments] = useState([])
     const {article_id} = useParams()
     const [isLoading, setIsLoading] = useState(true)
+
+
 
 
     useEffect(() => {
@@ -20,7 +22,7 @@ const ViewComment = () => {
             setIsLoading(false)           
         })
 
-    }, [])
+    }, [fetchComments])
 
     if (isLoading){
         return (
@@ -32,7 +34,7 @@ const ViewComment = () => {
 
     return (
         <>
-        <CommentCard comments={comments}/>
+        <CommentCard comments={comments} setFetchComments={setFetchComments}/>
         </>
 
     )
